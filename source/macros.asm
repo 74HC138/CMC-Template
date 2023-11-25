@@ -117,7 +117,8 @@
     macro DSPeekIY
         push bc
         DSPeekBC \1
-        ld iy, bc
+        push bc
+        pop iy
         pop bc
     endmacro
     macro DSPeekNNin
@@ -239,5 +240,20 @@
         jp (hl) ;1
         pop hl
     endmacro
+
+;-----------------------------------------------
+;IO
+    macro print
+        DSPushNN \1
+        call stdio.puts
+        DSRestore 2
+    endmacro
+    macro printNL
+        DSPushN 10 ;\n does not get escaped corretly... for some reason *shrug*
+        call stdio.putc
+        DSRestore 1
+    endmacro
+;-----------------------------------------------
+;Structures
 
 ;-----------------------------------------------

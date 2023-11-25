@@ -287,6 +287,30 @@ stdio.puts16d:
         pop hl
         ret
 
+stdio.puts:
+        push hl
+        DSPeekHL 0
+    .putsloop:
+        ld a, (hl)
+        cp 0x00
+        jr z, .putsexit
+        DSPush a
+        callNNin .pPutcFunction
+        DSRestore 1
+        inc hl
+        jr .putsloop
+
+    .putsexit:
+        pop hl
+        ret 
+
+stdio.putc:
+        callNNin .pPutcFunction
+        ret
+
+
+
+
 
 
 

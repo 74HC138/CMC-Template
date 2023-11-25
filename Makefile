@@ -51,7 +51,7 @@ romfs: $(BUILD_DIR)
 			rm $(ROMFS_MOUNTPOINT) -r; \
 		fi; \
 		mkdir $(ROMFS_MOUNTPOINT); \
-		sudo mount $(ROMFS_OUTPUT) $(ROMFS_MOUNTPOINT); \
+		sudo mount -t msdos -o loop $(ROMFS_OUTPUT) $(ROMFS_MOUNTPOINT); \
 		sudo cp -r $(ROMFS_FOLDER)/. $(ROMFS_MOUNTPOINT)/.; \
 		sudo umount $(ROMFS_MOUNTPOINT); \
 		rm -rf $(ROMFS_MOUNTPOINT); \
